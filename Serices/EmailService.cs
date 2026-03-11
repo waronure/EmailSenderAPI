@@ -33,9 +33,11 @@ public class EmailService : IEmailService
 
     private SmtpClient ConfigureSmtpClient()
     {
+        Console.WriteLine(_settings.Username, _settings.Password);
         return new SmtpClient(_settings.Server, _settings.Port)
         {
-            Credentials = new NetworkCredential(_settings.FromEmail, _settings.Password)
+            Credentials = new NetworkCredential(_settings.Username, _settings.Password),
+            EnableSsl = true
         };
     }
 }
